@@ -21,7 +21,52 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    Recipe.create({
+    
+      "title": "Asian Glazed Chicken Thighs",
+      "level": "Amateur Chef",
+      "ingredients": [
+        "1/2 cup rice vinegar",
+        "5 tablespoons honey",
+        "1/3 cup soy sauce (such as Silver Swan®)",
+        "1/4 cup Asian (toasted) sesame oil",
+        "3 tablespoons Asian chili garlic sauce",
+        "3 tablespoons minced garlic",
+        "salt to taste",
+        "8 skinless, boneless chicken thighs"
+      ],
+      "cuisine": "Asian",
+      "dishType": "main_course",
+      "image": "https://images.media-allrecipes.com/userphotos/720x405/815964.jpg",
+      "duration": 40,
+      "creator": "Chef LePapu"
+    
   })
+  .then((result2) => {
+    console.log(result2.title)
+  })
+
+  Recipe.insertMany(data)
+      .then((result3)=>{
+        console.log(result3)
+        Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"}, {duration:100})
+        .then((result4)=>{
+          console.log(result4)
+          Recipe.deleteOne({title: "Carrot Cake"})
+          .then((result5)=>{
+            console.log(result5)
+            mongoose.connection.close()
+            .then(()=>{
+              console.log(`Server closed`)
+            })
+          })
+        })
+      })
+
+  })
+  
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+  
